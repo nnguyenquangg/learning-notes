@@ -1,0 +1,55 @@
+numPartitions: 3
+maxMessageBytes: 5128000
+logRetentionHours: 24
+metrics:
+  kafka:
+    enabled: true
+volumePermissions:
+  enabled: true
+livenessProbe:
+  timeoutSeconds: 120
+resources:
+  requests:
+    memory: "500Mi"
+    cpu: "500m"
+
+cluster:
+  replicas: 3
+
+  broker:
+    id: "1"
+    storageSize: "10Gi"
+    listeners:
+      - name: PLAINTEXT
+        port: 9092
+        type: "internal"
+    advertisedListeners:
+      - name: PLAINTEXT
+        port: 9092
+        type: "internal"
+        host: localhost
+
+  extraBrokers:
+    - id: "2"
+      storageSize: "10Gi"
+      listeners:
+        - name: PLAINTEXT
+          port: 9093
+          type: "internal"
+      advertisedListeners:
+        - name: PLAINTEXT
+          port: 9093
+          type: "internal"
+          host: localhost
+
+    - id: "3"
+      storageSize: "10Gi"
+      listeners:
+        - name: PLAINTEXT
+          port: 9094
+          type: "internal"
+      advertisedListeners:
+        - name: PLAINTEXT
+          port: 9094
+          type: "internal"
+          host: localhost
