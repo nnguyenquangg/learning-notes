@@ -1,0 +1,4 @@
+- Atomicity: hoàn thành hoặc không hoàn thành toàn bộ giao dịch, không có trạng thái trung gian nào.
+- Consistency: đảm bảo rằng dữ liệu được thay đổi trong một giao dịch luôn đảm bảo tính nhất quán với các ràng buộc dữ liệu (constraints) và quy tắc liên quan.
+- Isolation: đảm bảo rằng các giao dịch khác không ảnh hưởng đến các giao dịch đang thực hiện, bằng cách sử dụng các phương thức khóa (locking) và cách cô lập dữ liệu.
+- Durability: đảm bảo rằng dữ liệu được ghi vào đĩa cứng sẽ không bị mất đi và có thể phục hồi sau một sự cố.
