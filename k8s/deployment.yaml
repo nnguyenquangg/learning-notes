@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-client
+  namespace: benchmark-server-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-client
+  template:
+    metadata:
+      labels:
+        app: microservice-client
+    spec:
+      containers:
+      - name: microservice-client
+        image: nguyenquang0601/benchmark-client:0.0.10
+        ports:
+        - containerPort: 3009
+          name: api
+        - containerPort: 3001
+          name: grpc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-client-service
+  namespace: benchmark-server-dev
+spec:
+  selector:
+    app: microservice-client
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      name: api
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+      name: grpc
+  type: NodePort
