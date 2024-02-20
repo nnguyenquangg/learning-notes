@@ -1,0 +1,82 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: gateway-grpc
+spec:
+  gateways:
+  - default/ingressgateway-grpc-qa-dgnx-io
+  hosts:
+  - esg-gateway-grpc-diginex.qa.dgnx.io
+  http:
+  - match:
+    - uri:
+        prefix: /esgTenant
+    name: 1-esg-tenant
+    route:
+    - destination:
+        host: tenant-backend.esg-tenant-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /esgUserOrganization
+    name: 2-user-organization
+    route:
+    - destination:
+        host: user-organization-backend.platform-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /frameworkBuilder
+    name: 3-framework-builder
+    route:
+    - destination:
+        host: framework-builder-api.framework-builder-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /esgReport
+    name: 4-esg-report
+    route:
+    - destination:
+        host: report-backend.esg-report-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /esgExport
+    name: 5-esg-export
+    route:
+    - destination:
+        host: export-backend.esg-export-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /esgMateriality
+    name: 6-esg-materiality
+    route:
+    - destination:
+        host: materiality-backend.materiality-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /reportingEntity
+    name: 7-reporting-entity
+    route:
+    - destination:
+        host: reporting-entity-backend.reporting-entity-diginex-qa.svc.cluster.local
+        port:
+          number: 3001
+  - match:
+    - uri:
+        prefix: /diginexEsg
+    name: 8-core
+    route:
+    - destination:
+        host: esg-backend.esgc-diginex-qa.svc.cluster.local
+        port:
+          number: 3001

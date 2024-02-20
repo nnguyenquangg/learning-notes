@@ -1,0 +1,56 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:11.8-alpine
+    expose:
+      - '5432'
+    ports:
+      - '5432:5432'
+    volumes:
+      - data-volume:/data/db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: esgDB
+    networks:
+      - postgres
+  pgadmin:
+    links:
+      - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4:6.14
+    ports:
+      - '8089:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - postgres
+  adminer:
+    image: adminer:latest
+    ports:
+      - 5082:8080
+    networks:
+      - postgres
+  mailtrap:
+    image: eaudeweb/mailtrap
+    ports:
+      - 4082:80
+      - '127.0.0.1:2525:25'
+  redis:
+    image: redis:6.2.5-alpine
+    container_name: redis
+    ports:
+      - '6379:6379'
+    expose:
+      - '6379'
+    networks:
+      - postgres
+volumes:
+  data-volume:
+  pgadmin:
+networks:
+  postgres:
+    driver: bridge
