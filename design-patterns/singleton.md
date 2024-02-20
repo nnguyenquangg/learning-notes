@@ -12,6 +12,7 @@
 
 - Here's a simple example in Java:
 
+
 ```java
 public class Singleton {
     private static Singleton instance;
