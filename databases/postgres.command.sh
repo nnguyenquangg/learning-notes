@@ -1,0 +1,2 @@
+pg_dump --host=localhost --port=5436 --username=postgres --dbname=climate > ~/Desktop/db2/uat/cliate.sql
+psql --host=localhost --port=5432 --username=postgres --db=new-esgc2 < ~/Desktop/db2/uat/esgc.sql
