@@ -6,3 +6,5 @@ kubectl -n staging scale deployments/backend --replicas=1
 kubectl -n trustesg-hodford-dev rollout history esg-frontend-dev-monochartg
 kubectl -n trustesg-hodford-dev rollout history deployments/esg-frontend-dev-monochart --revision=100
 kubectl -n framework-builder-uat port-forward  framework-builder-infra-uat-postgresql-0 5432:5432
+kubectl edit -n jaguar-dev deployments esg-tenant-backend-jaguar-dev -oyaml
+kubectl -n diginex-uat logs -f -l app.kubernetes.io/instance=esg-api-gateway-diginex-uat
